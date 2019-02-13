@@ -233,9 +233,13 @@ class WYSIJA_help_front extends WYSIJA_help{
 
     function is_default_mailpoet_page(){
         global $post;
+
+        if ( !$post ) {
+            return false;
+        }
+
         $model_config = WYSIJA::get('config','model');
-        if($post->ID == $model_config->getValue('confirm_email_link')) return true;
-        else return false;
+        return $post->ID == $model_config->getValue('confirm_email_link');
     }
 
     /**
@@ -275,7 +279,7 @@ class WYSIJA_help_front extends WYSIJA_help{
         if ($model_config->getValue('confirm_dbleoptin')){
             $confirmed_subscribers = true;
         }
-        
+
         return $user->countSubscribers($list_ids, $confirmed_subscribers);
     }
 
