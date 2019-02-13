@@ -8,13 +8,14 @@ At the moment the same as of legacy plugin.
 
 ## Changes
 
-### Compatibility
+### API
 
 * There is no default filter hooked to the `wysija_send_ok` hook, thus default value passed to `wysija_send_ok` filter is now `true` instead of `false`.
 * Following (deprecated) actions have been removed: `wysija_send_test_editor` and `wysija_manual_send`.
 
 ### Fixes
 
+* PHP 7.2 compatibility
 * The code has been made more defensive in several places in order to not trigger PHP notices about undefined array keys etc.
 
 ### Tweaks

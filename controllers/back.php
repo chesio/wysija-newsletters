@@ -217,7 +217,7 @@ class WYSIJA_control_back extends WYSIJA_control{
         $_POST   = stripslashes_deep($_POST);
 
         $is_batch_select = $this->_batchSelect();
-        $this->_affected_rows = $is_batch_select ? $this->_batch_select['count'] : (!empty($_REQUEST['wysija']['user']['user_id']) ? count($_REQUEST['wysija']['user']['user_id']) : 0);
+        $this->_affected_rows = $is_batch_select ? $this->_batch_select['count'] : ((!empty($_REQUEST['wysija']['user']['user_id']) && is_array($_REQUEST['wysija']['user']['user_id'])) ? count($_REQUEST['wysija']['user']['user_id']) : 0);
         if(method_exists($this, $action)){
             /* in some bulk actions we need to specify the action name and one or few variables*/
             $this->action=$action;
