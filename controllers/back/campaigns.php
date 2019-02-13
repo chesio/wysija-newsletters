@@ -202,25 +202,16 @@ class WYSIJA_control_back_campaigns extends WYSIJA_control_back {
 	 */
 	function manual_send($dataPost = false) {
 		$this->requireSecurity();
-                $modelQ = WYSIJA::get('queue', 'model');
-		$config = WYSIJA::get('config', 'model');
-		if ((int) $config->getValue('total_subscribers') < 2000) {
-			if ($modelQ->count() > 0) {
-				$helperQ = WYSIJA::get('queue', 'helper');
-				$emailid = false;
-				if ($_REQUEST['emailid']) {
-					$emailid = (int)$_REQUEST['emailid'];
-				}
-				$helperQ->process($emailid);
-			} else {
-				echo '<strong style="font-family: Arial; font-weight: bold; font-size: 12px;">' . __('Queue is empty!', WYSIJA) . '</strong>';
+		$modelQ = WYSIJA::get('queue', 'model');
+		if ($modelQ->count() > 0) {
+			$helperQ = WYSIJA::get('queue', 'helper');
+			$emailid = false;
+			if ($_REQUEST['emailid']) {
+				$emailid = (int)$_REQUEST['emailid'];
 			}
-			exit;
+			$helperQ->process($emailid);
 		} else {
-			//deprecated
-			do_action('wysija_send_test_editor');
-
-			do_action('wysija_manual_send');
+			echo '<strong style="font-family: Arial; font-weight: bold; font-size: 12px;">' . __('Queue is empty!', WYSIJA) . '</strong>';
 		}
 
 		exit;

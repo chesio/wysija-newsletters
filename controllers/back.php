@@ -264,16 +264,6 @@ class WYSIJA_control_back extends WYSIJA_control{
 
         if(defined('WYSIJA_REDIRECT'))  $this->redirectProcess();
 
-        if( !empty( $_REQUEST['page'] ) && $_REQUEST['page'] !== 'wysija_premium'){
-            $this->checkTotalSubscribers();
-        }
-
-    }
-
-    function checkTotalSubscribers(){
-        add_action('wysija_check_total_subscribers',array($this,'_checkTotalSubscribers'));
-        do_action('wysija_remove_action_check_total_subscribers');
-        do_action('wysija_check_total_subscribers');
     }
 
     /**
@@ -329,33 +319,6 @@ class WYSIJA_control_back extends WYSIJA_control{
         $this->_batch_select['query'] = 'SELECT user_id FROM '.$temp_table_name;
         $this->_batch_select['count'] = $row_count['row_count'];
         return true;
-    }
-
-
-
-    function _checkTotalSubscribers(){
-
-        $config=WYSIJA::get('config','model');
-        $totalSubscribers=$config->getValue('total_subscribers');
-        $helper_licence = WYSIJA::get('licence','helper');
-
-        if((int)$totalSubscribers>1900){
-            if((int)$totalSubscribers>2000){
-
-                $url_checkout = $helper_licence->get_url_checkout('over200');
-                $this->error(str_replace(array('[link]','[/link]'),
-                array('<a title="'.__('Get Premium now',WYSIJA).'" target="_blank" href="'.$url_checkout.'">','</a>'),
-                sprintf(__('Yikes. You\'re over the limit of 2000 subscribers for the free version of MailPoet (%1$s in total). Sending is disabled now. Please upgrade your version to [link]premium[/link] to send without limits.',WYSIJA)
-                        ,$totalSubscribers)),true);
-
-            }else{
-                $url_checkout = $helper_licence->get_url_checkout('near200');
-                $this->notice(str_replace(array('[link]','[/link]'),
-                    array('<a title="'.__('Get Premium now',WYSIJA).'" target="_blank" href="'.$url_checkout.'">','</a>'),
-                    sprintf(__('Yikes! You\'re near the limit of %1$s subscribers for MailPoet\'s free version. Upgrade to [link]Premium[/link] to send without limits, and more.',WYSIJA)
-                            ,"2000")));
-            }
-        }
     }
 
     function edit($id=false){

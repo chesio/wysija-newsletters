@@ -135,7 +135,6 @@ class WYSIJA_control_back_config extends WYSIJA_control_back{
     }
 
     function render(){
-        $this->checkTotalSubscribers();
         $this->viewObj->render($this->action,$this->data);
     }
 

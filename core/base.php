@@ -762,16 +762,11 @@ class WYSIJA extends WYSIJA_object{
 			WYSIJA::check_scheduled_newsletters();
 		}
 
-		$model_config = WYSIJA::get('config','model');
-		// check that the 2000 limit is not passed and process the queue
+		$helper_queue = WYSIJA::get('queue','helper');
+		$helper_queue->report=false;
+		WYSIJA::log('croned_queue process',true,'cron');
 
-		if((int)$model_config->getValue('total_subscribers') < 2000 ){
-			$helper_queue = WYSIJA::get('queue','helper');
-			$helper_queue->report=false;
-			WYSIJA::log('croned_queue process',true,'cron');
-
-			$helper_queue->process();
-		}
+		$helper_queue->process();
 
 	}
 

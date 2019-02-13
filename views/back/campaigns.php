@@ -758,13 +758,6 @@ class WYSIJA_view_back_campaigns extends WYSIJA_view_back {
 		return $statustext;
 	}
 
-	function sending_process() {
-		$config = WYSIJA::get("config", "model");
-		if ((int) $config->getValue('total_subscribers') < 2000)
-			return true;
-		return false;
-	}
-
 	function dataBatches($data, $row, $pause, $statuses, $pending = false) {
 		$sentto = $senttotal = $sentleft = 0;
 		$return = '<div>';
@@ -784,8 +777,7 @@ class WYSIJA_view_back_campaigns extends WYSIJA_view_back {
 		if ($sentleft > 0) {
 
 			$config = WYSIJA::get('config', 'model');
-			add_filter('wysija_send_ok', array($this, 'sending_process'));
-			$letsgo = apply_filters('wysija_send_ok', false);
+			$letsgo = apply_filters('wysija_send_ok', true);
 
 			if ($letsgo) {
 
