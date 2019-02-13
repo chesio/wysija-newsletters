@@ -100,9 +100,12 @@ class WYSIJA_help_articles extends WYSIJA_object {
 
 		// post meta (author, categories)
 		$post_meta_above = '';
+
+		$is_event = isset($post['snbp_event_date']); // CeP: post is an event <=> post has event date
+
 		// if the author or categories are displayed, open a new paragraph
-		if($params['author_show'] === 'above' || $params['category_show'] === 'above') {
-			$post_meta_above .= '<p>';
+		if($params['author_show'] === 'above' || $params['category_show'] === 'above' || $is_event) { // CeP
+			$post_meta_above .= '<p><strong><span style="color: rgb(149, 149, 149);">'; // CeP: make it strong and gray
 		}
 
 		// author above
@@ -116,12 +119,18 @@ class WYSIJA_help_articles extends WYSIJA_object {
 				$post_meta_above .= '<br />';
 			}
 			// display post categories
-			$post_meta_above .= $this->getPostCategories($post, $params);
+			$post_meta_above .= $is_event ? $this->getEventCategories($post, $params) : $this->getPostCategories($post, $params); // CeP
+		}
+
+		// CeP
+		if ($is_event) {
+			if ($params['author_show'] === 'above' || $params['category_show'] === 'above') { $post_meta_above .= ' | '; }
+			$post_meta_above .= nexus_format_date_for_newsletter($post);
 		}
 
 		// close the paragraph around author and categories
-		if($params['author_show'] === 'above' || $params['category_show'] === 'above') {
-			$post_meta_above .= '</p>';
+		if($params['author_show'] === 'above' || $params['category_show'] === 'above' || $is_event) { // CeP
+			$post_meta_above .= '</span></strong></p>'; // CeP: made it strong
 		}
 
 		if($params['post_content'] !== 'title') {
@@ -133,6 +142,16 @@ class WYSIJA_help_articles extends WYSIJA_object {
 			}
 		} else {
 			$content = $post_meta_above.$content;
+		}
+
+		// CeP: event pricing known?
+		$prices = array();
+		if ( !empty($post['snbp_vk_erwachsene']) ) { $prices[] = 'VK Erwachsene ' . $post['snbp_vk_erwachsene']; }
+		if ( !empty($post['snbp_vk_jugendliche']) ) { $prices[] = 'VK Jugend/Senioren ' . $post['snbp_vk_jugendliche']; }
+		if ( !empty($post['snbp_ak_erwachsene']) ) { $prices[] = 'AK Erwachsene ' . $post['snbp_ak_erwachsene']; }
+		if ( !empty($post['snbp_ak_jugendliche']) ) { $prices[] = 'AK Jugend/Senioren ' . $post['snbp_ak_jugendliche']; }
+		if ( count($prices) ) {
+			$content .= '<p><strong>Eintritt:</strong> ' . implode(' | ', $prices) . '</p>'; // CeP - TODO: Literal!
 		}
 
 		if($params['post_content'] !== 'title') {
@@ -159,7 +178,7 @@ class WYSIJA_help_articles extends WYSIJA_object {
 			if($params['author_show'] === 'below') {
 				$post_meta_below .= '<br />';
 			}
-			$post_meta_below .= $this->getPostCategories($post, $params);
+			$post_meta_below .= $is_event ? $this->getEventCategories($post, $params) : $this->getPostCategories($post, $params); // CeP
 		}
 
 		// close the paragraph around author and categories
@@ -240,6 +259,24 @@ class WYSIJA_help_articles extends WYSIJA_object {
 		return $content;
 	}
 
+	/**
+	 * CeP: Get event categories.
+	 *
+	 * @param array $post
+	 * @param array $params
+	 * @return string
+	 */
+	public function getEventCategories($post, $params) {
+		if (!is_array($post) || empty($post['ID'])) {
+			return '';
+		}
+
+		// get categories
+		$before = trim($params['category_label']) ? stripslashes(trim($params['category_label'])) . ' ' : '';
+		$list = get_the_term_list($post['ID'], 'event_types', $before, ', ', '');
+		return is_string($list) ? $list : '';
+	}
+
 	public function getPostCategories($post = array(), $params = array()) {
 		$content = '';
 
@@ -305,6 +342,21 @@ class WYSIJA_help_articles extends WYSIJA_object {
 
 			// get alt text
 			$altText = trim(strip_tags(get_post_meta($post_thumbnail, '_wp_attachment_image_alt', true)));
+			if(strlen($altText) === 0) {
+				// if the alt text is empty then use the post title
+				$altText = trim(strip_tags($post['post_title']));
+			}
+		}
+		// CeP: check for event poster - the code is essentialy the same as above,
+		// only image ID is retrieved differently.
+		elseif ( isset($post['snbp_pitemlink']) ) {
+			$cover_image_id = get_image_id_by_link($post['snbp_pitemlink']);
+
+			// get attachment data (src, width, height)
+			$image_info = wp_get_attachment_image_src($cover_image_id, 'post-thumbnail');
+
+			// get alt text
+			$altText = trim(strip_tags(get_post_meta($cover_image_id, '_wp_attachment_image_alt', true)));
 			if(strlen($altText) === 0) {
 				// if the alt text is empty then use the post title
 				$altText = trim(strip_tags($post['post_title']));

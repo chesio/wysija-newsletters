@@ -40,6 +40,66 @@ class WYSIJA_model_wp_posts extends WYSIJA_model {
     $this->table_prefix = '';
   }
 
+  /**
+   * CeP: A custom function to retrieve post meta information.
+   * @param array $post_ids List of post IDs to retrieve meta information for.
+   * @return array
+   */
+  function get_post_meta($post_ids) {
+
+    // Slow, but safe approach.
+    $meta = array();
+    foreach ( $post_ids as $post_id ) {
+      $post_meta = array();
+      // Event date
+      $event_date = get_post_meta($post_id, 'snbp_event_date', true);
+      if ( $event_date ) { $post_meta['snbp_event_date'] = $event_date; }
+      // Event time
+      $event_time = get_post_meta($post_id, 'snbp_event_time', true);
+      if ( $event_time ) { $post_meta['snbp_event_time'] = $event_time; }
+      // Event cover
+      $event_image = get_post_meta($post_id, 'snbp_pitemlink', true);
+      if ( $event_image ) { $post_meta['snbp_pitemlink'] = $event_image; }
+      // Event pricing
+      $ak_erwachsene = trim(get_post_meta($post_id, 'snbp_ak_erwachsene', true));
+      $ak_jugendliche = trim(get_post_meta($post_id, 'snbp_ak_jugendliche', true));
+      $vk_erwachsene = trim(get_post_meta($post_id, 'snbp_vk_erwachsene', true));
+      $vk_jugendliche = trim(get_post_meta($post_id, 'snbp_vk_jugendliche', true));
+      if ( $ak_erwachsene ) { $post_meta['snbp_ak_erwachsene'] = $ak_erwachsene; }
+      if ( $ak_jugendliche ) { $post_meta['snbp_ak_jugendliche'] = $ak_jugendliche; }
+      if ( $vk_erwachsene ) { $post_meta['snbp_vk_erwachsene'] = $vk_erwachsene; }
+      if ( $vk_jugendliche ) { $post_meta['snbp_vk_jugendliche'] = $vk_jugendliche; }
+      //
+      $meta[$post_id] = $post_meta;
+    }
+
+    return $meta;
+
+  //  // Faster, but fetching the database directly can lead to unexpected errors.
+  //  if ( empty($post_ids) ) { return array(); }
+  //
+  //  $post_ids = array_map(intval, $post_ids);
+  //
+  //  $query = "SELECT A.post_id, A.meta_key, A.meta_value FROM [wp]postmeta A WHERE ";
+  //  $conditions = array();
+  //
+  //  foreach ( $post_ids as $post_id ) {
+  //    $conditions[] = "A.post_id = $post_id";
+  //  }
+  //
+  //  $query .= implode(' OR ', $conditions);
+  //
+  //  $result = $this->query('get_res', $query);
+  //
+  //  // Output is an array with IDs as keys and values with array(`meta_key` => 'meta_value')
+  //  $output = array_fill_keys($post_ids, array());
+  //  foreach ( $result as $row ) {
+  //    $output[intval($row['post_id'])][$row['meta_key']] = $row['meta_value'];
+  //  }
+  //  return $output;
+  }
+
+
   function get_posts($args = array()) {
     /**
      * SELECT A.ID, A.post_title, A.post_content, A.post_date FROM `wp_posts` A

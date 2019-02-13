@@ -285,6 +285,15 @@ class WYSIJA_control_back_campaigns extends WYSIJA_control{
 		$model_wp_posts = WYSIJA::get('wp_posts', 'model');
 		$posts = $model_wp_posts->get_posts($post_params);
 
+		// CeP - get posts meta.
+		$post_meta = $model_wp_posts->get_post_meta($post_ids);
+		foreach ( $posts as $key => $post ) {
+			$meta = $post_meta[$post['ID']];
+			foreach ( $meta as $meta_key => $meta_value ) {
+				$posts[$key][$meta_key] = $meta_value;
+			}
+		}
+
 		// check if we need to interpret shortcodes
 		$model_config = WYSIJA::get('config', 'model');
 		$interpret_shortcode = (bool)$model_config->getValue('interp_shortcode');
