@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `created_at` INT unsigned NULL,
   `status` TINYINT  NOT NULL  DEFAULT 0,
   `domain` VARCHAR(255) NULL DEFAULT '',
+  `count_confirmations` INT unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `EMAIL_UNIQUE` (`email`)
 ) /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci*/;
