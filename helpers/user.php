@@ -58,7 +58,7 @@ class WYSIJA_help_user extends WYSIJA_object {
             $model_user_list->update(array('unsub_date' => time(), 'sub_date' => 0), array('user_id' => $user_id, 'unsub_date' => 0));
 
             // the data  we update on the user row
-            $user_updated_data = array('status' => $status);
+            $user_updated_data = array('status' => $status, 'count_confirmations' => 0);
         }
 
         $modelUser = WYSIJA::get('user', 'model');

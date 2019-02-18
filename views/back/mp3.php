@@ -34,15 +34,6 @@ class WYSIJA_view_back_mp3 extends WYSIJA_view_back{
           <p style="margin: 2em 0 2em 0">(<?php echo __('It installs as a separate plugins, so your existing MailPoet 2 plugin will continue to work', WYSIJA); ?>)
         </div></div>
 
-        <hr>
-
-        <div class="feature-section one-col"><div class="col center">
-            <h2><?php echo __('Upgrade to Premium – Save 50%', WYSIJA); ?></h2>
-            <p><?php echo __('For a limited time only, pay just $50 for MailPoet Premium (usually $99 a year for one site!)', WYSIJA); ?>
-            <p><b><?php echo __('Hurry, this one-time offer is only valid until 30 November.', WYSIJA); ?></b>
-            <p><?php echo $this->replace_link_shortcode(__('[link]Install MailPoet 3[/link] to claim your discount.', WYSIJA), 'plugin-install.php?s=mailpoet&tab=search&type=author'); ?>
-          </div></div>
-
         <hr style="margin-bottom: 2em">
 
         <div class="floating-header-section">
@@ -93,7 +84,7 @@ class WYSIJA_view_back_mp3 extends WYSIJA_view_back{
             </div>
             <div class="section-item">
               <h3><?php echo __('Need Help Switching?', WYSIJA); ?></h3>
-              <p><?php echo __('We’re happy to chat with you! With team members spread around the world, MailPoet offers fast, reliable and friendly support via email and live chat. Prefer to DIY? Our knowledge base is always online. Reach out any time — we’re real humans and here to help.', WYSIJA); ?>
+              <p><?php echo __('We’re happy to chat with you! With team members spread around the world, MailPoet offers fast, reliable and friendly support via email. Prefer to DIY? Our knowledge base is always online. Reach out any time — we’re real humans and here to help.', WYSIJA); ?>
             </div>
           </div>
         </div>

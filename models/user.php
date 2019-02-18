@@ -18,6 +18,7 @@ class WYSIJA_model_user extends WYSIJA_model{
         'confirmed_at' => array(),
         'last_opened' => array(),
         'last_clicked' => array(),
+        'count_confirmations' => array('type'=>'integer'),
     );
     var $searchable = array('email','firstname', 'lastname');
 

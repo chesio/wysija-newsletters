@@ -582,6 +582,21 @@ class WYSIJA_help_mailer extends PHPMailer {
 			return false;
 		}
 
+    $max_confirmation_emails = apply_filters('wysija_subscription_max_confirmation_emails', 3);
+
+    if ($confirmEmail && !is_user_logged_in()) {
+      // limit the number of confirmations sent to a user to prevent abuse
+      if ($receiver->count_confirmations >= $max_confirmation_emails) {
+        // skip sending of a confirmation email
+        return true;
+      } else {
+        $this->subscriberClass->update(
+          array('count_confirmations' => ++$receiver->count_confirmations),
+          array('user_id' => (int)$receiver->user_id)
+        );
+      }
+    }
+
 		// message id to recognise it when using the bounce
 		$message_id=base64_encode(rand(0,9999999)).'WY'.(int)$receiver->user_id;
 		$message_id.='SI'.(int)$this->defaultMail[$email_id]->email_id;

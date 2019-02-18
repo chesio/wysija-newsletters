@@ -2140,7 +2140,7 @@ class WYSIJA_control_back_campaigns extends WYSIJA_control_back {
 		$this->modelObj->query($query1);
 
 		// unsubscribe from user where select from email_user_stat
-		$query2 = "UPDATE `[wysija]user` SET `status`=-1 WHERE `user_id` IN ($query)";
+		$query2 = "UPDATE `[wysija]user` SET `status`=-1, `count_confirmations`=0 WHERE `user_id` IN ($query)";
 		$this->modelObj->query($query2);
 
 		$this->notice(__('The segment has been unsubscribed from all the lists.', WYSIJA));
