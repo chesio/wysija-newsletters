@@ -21,5 +21,5 @@ At the moment the same as of legacy plugin.
 ### Tweaks
 
 * All functionality related to 2000 subscribers limit have been removed, including following `actions`:
- * `wysija_check_total_subscribers`
- * `wysija_remove_action_check_total_subscribers`
+  * `wysija_check_total_subscribers`
+  * `wysija_remove_action_check_total_subscribers`
