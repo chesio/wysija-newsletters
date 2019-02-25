@@ -4,7 +4,8 @@ Fork of [legacy version](https://wordpress.org/plugins/wysija-newsletters/) of [
 
 ## Requirements
 
-At the moment the same as of legacy plugin.
+* [PHP](https://secure.php.net/) 5.3 or newer
+* [WordPress](https://wordpress.org/) 3.5 or newer
 
 ## Changes
 

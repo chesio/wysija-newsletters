@@ -2369,9 +2369,9 @@ class WYSIJA_view_back_campaigns extends WYSIJA_view_back {
 							$start = ( $_GET['paged'] - 1 ) * $limit;
 							if ($start < 1)
 								$start = 0;
-							add_filter('post_limits', create_function('$a', "return 'LIMIT $start, $limit';"));
+							add_filter('post_limits', function () use ($start, $limit) { return "LIMIT $start, $limit"; });
 							add_filter('posts_where_paged', array($this, '__filterPostParent'));
-							//add_filter( 'posts_where_paged', create_function( '$a', "return ' AND post_parent!=1' " ) );
+							//add_filter('posts_where_paged', function () { return ' AND post_parent!=1'; });
 
 							list($post_mime_types, $avail_post_mime_types) = wp_edit_attachments_query(array('post_mime_type' => array('image')));
 							?>

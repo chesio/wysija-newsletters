@@ -3,6 +3,7 @@ Contributors: wysija
 Tags: newsletter, email, welcome email, post notification, autoresponder, signup, subscription, SMTP
 Requires at least: 3.5
 Tested up to: 4.9
+Requires PHP: 5.3
 Stable tag: 2.11
 Send newsletters post notifications or autoresponders from WordPress easily, and beautifully. Start to capture subscribers with our widget now.
 
