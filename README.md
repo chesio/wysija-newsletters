@@ -9,6 +9,8 @@ Fork of [legacy version](https://wordpress.org/plugins/wysija-newsletters/) of [
 
 ## Changes
 
+Note: All changes can be reviewed by [comparing](https://github.com/chesio/wysija-newsletters/compare/master...develop) master branch (legacy version) to develop branch (forked version with updates).
+
 ### API
 
 * There is no default filter hooked to the `wysija_send_ok` hook, thus default value passed to `wysija_send_ok` filter is now `true` instead of `false`.
