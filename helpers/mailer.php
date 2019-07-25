@@ -6,6 +6,8 @@
 defined( 'WYSIJA' ) || die( 'Restricted access' );
 
 require_once ABSPATH . WPINC . '/class-phpmailer.php';
+require_once dirname(__FILE__) . '/blacklist.php';
+
 class WYSIJA_help_mailer extends PHPMailer {
 	var $report = true;
 	var $checkConfirmField = true;
@@ -32,6 +34,8 @@ class WYSIJA_help_mailer extends PHPMailer {
 	var $listids = false;
 	var $listnames = false;
 	var $is_wp_mail = false;
+
+  private $blacklist;
 
   /**
    * Change parent properties scope for legacy compatibility
@@ -214,6 +218,13 @@ class WYSIJA_help_mailer extends PHPMailer {
 		$this->is_wp_mail = true;
 		$this->Mailer = 'wpmail';
 	}
+
+  function isBlacklisted($email) {
+    if (!$this->blacklist instanceof Blacklist) {
+      $this->blacklist = new Blacklist();
+    }
+    return $this->blacklist->isBlacklisted($email);
+  }
 
 	function send(){
 		// prevent user/script details being exposed in X-PHP-Script header
@@ -581,6 +592,11 @@ class WYSIJA_help_mailer extends PHPMailer {
 			$this->errorNumber = 4;
 			return false;
 		}
+
+    if ($this->isBlacklisted($receiver->email)) {
+      $this->core->error(__('The PHP Extension openssl is not enabled on your server. Ask your host to enable it if you want to use an SSL connection.',WYSIJA));
+      return false;
+    }
 
     $max_confirmation_emails = apply_filters('wysija_subscription_max_confirmation_emails', 3);
 
