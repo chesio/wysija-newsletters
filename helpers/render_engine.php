@@ -40,7 +40,7 @@ class WYSIJA_help_render_engine extends WYSIJA_object {
     const _LAST_COL = 'IS_LAST_COL';
     const _FIRST_ROW = 'IS_FIRST_ROW';
     const _LAST_ROW = 'IS_LAST_ROW';
-    const _VAR = '([\$#])([\w-_\.]+)';
+    const _VAR = '([\$#])([\w\-_\.]+)';
     const _MODIFIER = "(\|{0,1}[^}]*)";
 
     function __construct () { }
