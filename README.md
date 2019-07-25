@@ -4,7 +4,8 @@ Fork of [legacy version](https://wordpress.org/plugins/wysija-newsletters/) of [
 
 ## Requirements
 
-At the moment the same as of legacy plugin.
+* [PHP](https://www.php.net/) 5.3 or newer
+* [WordPress](https://wordpress.org/) 3.5 or newer
 
 ## Changes
 
@@ -20,6 +21,7 @@ At the moment the same as of legacy plugin.
 
 ### Tweaks
 
-* All functionality related to 2000 subscribers limit have been removed, including following `actions`:
- * `wysija_check_total_subscribers`
- * `wysija_remove_action_check_total_subscribers`
+* All functionality related to 2000 subscribers limit has been removed, including following `actions`:
+  * `wysija_check_total_subscribers`
+  * `wysija_remove_action_check_total_subscribers`
+* Blacklist functionality (introduced in upstream version 2.12) has been removed

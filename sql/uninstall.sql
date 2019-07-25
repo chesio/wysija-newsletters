@@ -27,3 +27,5 @@ DROP TABLE `url_mail`;
 DROP TABLE `form`;
 -- QUERY ---
 DROP TABLE `custom_field`;
+-- QUERY ---
+DROP TABLE `subscriber_ips`;
