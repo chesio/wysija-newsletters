@@ -16,7 +16,7 @@ Fork of [legacy version](https://wordpress.org/plugins/wysija-newsletters/) of [
 
 ### Fixes
 
-* PHP 7.2 compatibility
+* PHP 7.2 and 7.3 compatibility
 * The code has been made more defensive in several places in order to not trigger PHP notices about undefined array keys etc.
 
 ### Tweaks
