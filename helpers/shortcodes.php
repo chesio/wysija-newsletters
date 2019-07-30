@@ -94,15 +94,15 @@ class WYSIJA_help_shortcodes extends WYSIJA_object {
                     case 'user':
                         $replacement = $this->replace_user_shortcodes($couple_value[1]);
                         // "subscriber" or "member" means: we don't find out a right value for the tag.
-			// The next loop should be the tag "default".
-			// Let's "continue" and get the default value instead.
+                        // The next loop should be the tag "default".
+                        // Let's "continue" and get the default value instead.
                         if ($replacement === 'subscriber' || $replacement === 'member') {
-                            continue;
+                            break;
                         }
-                        break(2);
+                        break 2;
                     case 'default':
                         $replacement = $couple_value[1];
-                        break(2);
+                        break 2;
 
                     // [newsletter:xxx]
                     case 'newsletter':
@@ -155,26 +155,26 @@ class WYSIJA_help_shortcodes extends WYSIJA_object {
     private function replace_user_shortcodes($tag_value) {
         $replacement = '';
         if (($tag_value === 'firstname') || ($tag_value === 'lastname') || ($tag_value === 'email')) {
-            if(isset($this->receiver->$tag_value) && $this->receiver->$tag_value) {
+            if (isset($this->receiver->$tag_value) && $this->receiver->$tag_value) {
                 // uppercase the initials of the first name and last name when replacing it
                 if (($tag_value === 'firstname') || ($tag_value === 'lastname')){
-		    $use_default_case = apply_filters('mpoet_shortcode_names_default_case', false);
-		    if ($use_default_case) {
-			$replacement = $this->receiver->$tag_value;
-		    } else {
-			if (function_exists('mb_convert_case') && function_exists('mb_strtolower')) {
-			    // http://stackoverflow.com/questions/9823703/using-ucwords-for-non-english-characters
-			    $replacement = mb_convert_case(mb_strtolower($this->receiver->$tag_value),MB_CASE_TITLE, 'UTF-8');
-			} else {
-			    $replacement = ucwords(strtolower($this->receiver->$tag_value));
-			}
-		    }
-                }else{
+                    $use_default_case = apply_filters('mpoet_shortcode_names_default_case', false);
+                        if ($use_default_case) {
+                            $replacement = $this->receiver->$tag_value;
+                        } else {
+                            if (function_exists('mb_convert_case') && function_exists('mb_strtolower')) {
+                                // http://stackoverflow.com/questions/9823703/using-ucwords-for-non-english-characters
+                                $replacement = mb_convert_case(mb_strtolower($this->receiver->$tag_value),MB_CASE_TITLE, 'UTF-8');
+                            } else {
+                                $replacement = ucwords(strtolower($this->receiver->$tag_value));
+                            }
+                        }
+                } else {
                     $replacement = $this->receiver->$tag_value;
                 }
-             } else {
+            } else {
                 $replacement = 'subscriber';
-             }
+            }
         }
 
         if ($tag_value === 'displayname') {
@@ -319,35 +319,35 @@ class WYSIJA_help_shortcodes extends WYSIJA_object {
     private function replace_cfield_shortcodes($tag_value) {
         $replacement = '';
         if (isset($tag_value)) {
-          $user_id = (int) $this->receiver->user_id;
-          $field_id = (int) $tag_value;
-          $field_user = new WJ_FieldUser();
-          $field_user->set(array(
-            'user_id' =>  $user_id,
-            'field_id' => $field_id
-          ));
-          $value = $field_user->value();
-          // If we don't have a value, we return the empty string.
-          if (isset($value)) {
-            // Check if the field value needs formatting output.
-            switch ($field_user->field->type) {
-              case 'checkbox':
-                if ($value == 1) {
-                  $value = "Yes";
-                } else {
-                  $value ="No";
+            $user_id = (int) $this->receiver->user_id;
+            $field_id = (int) $tag_value;
+            $field_user = new WJ_FieldUser();
+            $field_user->set(array(
+                'user_id' =>  $user_id,
+                'field_id' => $field_id
+            ));
+            $value = $field_user->value();
+            // If we don't have a value, we return the empty string.
+            if (isset($value)) {
+                // Check if the field value needs formatting output.
+                switch ($field_user->field->type) {
+                    case 'checkbox':
+                        if ($value == 1) {
+                            $value = "Yes";
+                        } else {
+                            $value ="No";
+                        }
+                        break;
+                    case 'date':
+                        $value = date('F j, Y', $value);
+                        break;
+                    default:
+                        break;
                 }
-                break;
-              case 'date':
-                $value = date('F j, Y', $value);
-                break;
-              default:
-                break;
+                $replacement = $value;
+            } else {
+                $replacement = '';
             }
-            $replacement = $value;
-          } else {
-            $replacement = '';
-          }
         }
         return $replacement;
     }
