@@ -9,6 +9,7 @@ Author URI: http://www.mailpoet.com/
 License: GPLv2 or later
 Text Domain: wysija-newsletters
 Domain Path: /languages/
+GitHub Plugin URI: https://github.com/chesio/wysija-newsletters
 */
 
 /*

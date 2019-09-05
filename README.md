@@ -9,7 +9,7 @@ Fork of [legacy version](https://wordpress.org/plugins/wysija-newsletters/) of [
 
 ## Changes
 
-Note: All changes can be reviewed by [comparing](https://github.com/chesio/wysija-newsletters/compare/master...develop) master branch (legacy version) to develop branch (forked version with updates).
+Note: All changes can be reviewed by [comparing](https://github.com/chesio/wysija-newsletters/compare/legacy...master) legacy branch to master branch (forked version with updates).
 
 ### API
 
@@ -27,3 +27,4 @@ Note: All changes can be reviewed by [comparing](https://github.com/chesio/wysij
   * `wysija_check_total_subscribers`
   * `wysija_remove_action_check_total_subscribers`
 * Blacklist functionality (introduced in upstream version 2.12) has been removed
+* Integrate with [GitHub Updater](https://github.com/afragen/github-updater) - the plugin can only be updated from GitHub, never from WordPress.org Plugin Directory.

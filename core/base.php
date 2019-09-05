@@ -1467,6 +1467,11 @@ class WYSIJA extends WYSIJA_object{
 		}
 		return $mofile;
 	}
+
+	public static function hook_filter_github_updater_override_dot_org($overrides){
+		$overrides[] = 'wysija-newsletters/index.php';
+		return $overrides;
+	}
 }
 
 // subscribers/wp-user synch hooks
@@ -1481,6 +1486,10 @@ add_action('remove_user_from_blog', array('WYSIJA', 'hook_del_WP_subscriber'), 1
 
 // Load the Upgrader Class
 add_action('init', array('WJ_Upgrade', 'hook'), 9);
+
+// Never ever let GitHub Updater update this plugin from WordPress.org Plugins Directory.
+// See: https://github.com/afragen/github-updater/wiki/WordPress.org-Directory
+add_filter('github_updater_override_dot_org', array('WYSIJA', 'hook_filter_github_updater_override_dot_org'));
 
 // post notif trigger
 add_action('transition_post_status', array('WYSIJA', 'hook_postNotification_transition'), 1, 3);
