@@ -3,8 +3,7 @@ Contributors: wysija
 Tags: newsletter, email, welcome email, post notification, autoresponder, signup, subscription, SMTP
 Requires at least: 3.5
 Tested up to: 5.2
-Requires PHP: 5.3
-Stable tag: 2.12.pl
+Stable tag: 2.13.pl
 Send newsletters post notifications or autoresponders from WordPress easily, and beautifully. Start to capture subscribers with our widget now.
 
 == Description ==
@@ -113,6 +112,10 @@ Our [support site](https://www.mailpoet.com/support) has plenty of articles and 
 7. Importing subscribers with a CSV.
 
 == Changelog ==
+
+= 2.13 - 2019-11-05 =
+* Added a blacklist for email addresses that should not be receiving any emails;
+* Fixed PHP 7.3 support.
 
 = 2.12 - 2019-07-11 =
 * Added a blacklist for email addresses that should not be receiving any emails.
