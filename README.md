@@ -27,4 +27,4 @@ Note: All changes can be reviewed by [comparing](https://github.com/chesio/wysij
   * `wysija_check_total_subscribers`
   * `wysija_remove_action_check_total_subscribers`
 * Blacklist functionality (introduced in upstream version 2.12) has been removed
-* Integrate with [GitHub Updater](https://github.com/afragen/github-updater) - the plugin can only be updated from GitHub, never from WordPress.org Plugin Directory.
+* Integrate with [Git Updater](https://github.com/afragen/git-updater) - the plugin can only be updated from GitHub, never from WordPress.org Plugin Directory.
