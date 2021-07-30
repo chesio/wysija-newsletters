@@ -27,4 +27,5 @@ Note: All changes can be reviewed by [comparing](https://github.com/chesio/wysij
   * `wysija_check_total_subscribers`
   * `wysija_remove_action_check_total_subscribers`
 * Blacklist functionality (introduced in upstream version 2.12) has been removed
-* Integrate with [Git Updater](https://github.com/afragen/git-updater) - the plugin can only be updated from GitHub, never from WordPress.org Plugin Directory.
+* If [Git Updater](https://github.com/afragen/git-updater) is installed, this plugin can only be updated from GitHub, never from WordPress.org Plugin Directory.
+* The custom post type registered by this plugin is excluded from [core XML sitemaps](https://make.wordpress.org/core/2020/07/22/new-xml-sitemaps-functionality-in-wordpress-5-5/) added in WordPress 5.5.

@@ -1472,6 +1472,11 @@ class WYSIJA extends WYSIJA_object{
 		$overrides[] = 'wysija-newsletters/index.php';
 		return $overrides;
 	}
+
+	public static function hook_filter_wp_sitemaps_post_types($post_types) {
+		unset($post_types['wysijap']);
+		return $post_types;
+	}
 }
 
 // subscribers/wp-user synch hooks
@@ -1490,6 +1495,9 @@ add_action('init', array('WJ_Upgrade', 'hook'), 9);
 // Never ever let Git Updater update this plugin from WordPress.org Plugins Directory.
 // See: https://git-updater.com/knowledge-base/wordpress-org-directory/
 add_filter('gu_override_dot_org', array('WYSIJA', 'hook_filter_gu_override_dot_org'));
+
+// Exclude custom post type from core XML sitemaps.
+add_filter('wp_sitemaps_post_types', array('WYSIJA', 'hook_filter_wp_sitemaps_post_types'));
 
 // post notif trigger
 add_action('transition_post_status', array('WYSIJA', 'hook_postNotification_transition'), 1, 3);
