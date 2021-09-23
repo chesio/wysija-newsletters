@@ -246,7 +246,7 @@ class WYSIJA_NL_Widget extends WP_Widget {
 		//widget id should include the type of widget iframe, php, etc...
 		if ( isset( $args['widget_id'] ) ) {
 			// we come here only for classic wordpress widgetized area
-			$instance['id_form'] = str_replace( '_', '-', $args['widget_id'] );
+			$instance['id_form'] = str_replace( '_', '-', esc_attr( $args['widget_id'] ) );
 		} else {
 			// we come here everywhere else
 			if ( isset( $instance['form'] ) && isset( $instance['form_type'] ) ) {
