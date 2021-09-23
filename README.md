@@ -18,7 +18,7 @@ Note: All changes can be reviewed by [comparing](https://github.com/chesio/wysij
 
 ### Fixes
 
-* PHP 7.2 and 7.3 compatibility
+* Compatibility with PHP 7.2 and newer has been improved
 * The code has been made more defensive in several places in order to not trigger PHP notices about undefined array keys etc.
 
 ### Tweaks
