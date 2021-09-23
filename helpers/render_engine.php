@@ -421,7 +421,7 @@ class WYSIJA_help_render_engine extends WYSIJA_object {
                         $i++;
                     }
 
-                    $result_pattern .= implode ($loop, '');
+                    $result_pattern .= implode ('', $loop);
                 }
 
                 # replace

@@ -221,7 +221,7 @@ class WYSIJA_model_wp_posts extends WYSIJA_model {
           $conditions[] = array(
             'col' => 'A.post_title',
             'sign' => 'LIKE',
-            'val' => '%' . $value . '%'
+            'val' => '%' . esc_sql($value) . '%'
           );
         break;
         }
@@ -253,12 +253,12 @@ class WYSIJA_model_wp_posts extends WYSIJA_model {
 
     // order by
     if(isset($args['orderby'])) {
-      $query .= ' ORDER BY ' . $args['orderby'];
+      $query .= ' ORDER BY ' . preg_replace('/[^a-z_]/i', '', $args['orderby']);
       if(isset($args['sort_by'])) {
         $query .= ' ' . (($args['sort_by'] === 'newest') ? 'DESC' : 'ASC');
       } else {
         if(isset($args['order'])) {
-          $query .= ' ' . $args['order'];
+          $query .= ' ' . (strtolower($args['order']) === 'desc' ? 'DESC' : 'ASC');
         }
       }
     }

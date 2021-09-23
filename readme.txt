@@ -1,9 +1,9 @@
 === MailPoet Newsletters (Previous) ===
-Contributors: wysija
+Contributors: mailpoet
 Tags: newsletter, email, welcome email, post notification, autoresponder, signup, subscription, SMTP
 Requires at least: 3.5
 Tested up to: 5.5
-Stable tag: 2.14
+Stable tag: 2.15
 Send newsletters post notifications or autoresponders from WordPress easily, and beautifully. Start to capture subscribers with our widget now.
 
 == Description ==
@@ -112,6 +112,9 @@ Our [support site](https://www.mailpoet.com/support) has plenty of articles and 
 7. Importing subscribers with a CSV.
 
 == Changelog ==
+
+= 2.15 - 2021-09-21 =
+* Fixed security issues, thank you to Mike for reporting these issues.
 
 = 2.14 - 2020-07-22 =
 * Fixed PHPMail 6.x support for WordPress 5.5.

@@ -35,6 +35,7 @@ class WYSIJA_model_archive_std extends WYSIJA_model {
 		$where[]	= 'e.`sent_at` IS NOT NULL';
 		$where_join = '';
 		if (!empty($list_ids))
+			$list_ids = array_map('intval', $list_ids);
 			$where_join = ' AND cl.`list_id` IN ('.implode(',', $list_ids).')';
 		$query	  = '
             SELECT

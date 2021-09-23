@@ -949,7 +949,8 @@ class WYSIJA_help_user extends WYSIJA_object {
         // get the public list to which user is subscribed
         $model_user = WYSIJA::get('user_list', 'model');
 
-        if ($list_ids) {
+        if (is_array($list_ids) && !empty($list_ids)) {
+            $list_ids = array_map('intval', $list_ids);
             $query = "Select B.name from `[wysija]list` as B where B.list_id IN ('" . implode("','", $list_ids) . "') and B.is_enabled>0";
         } else {
             $query = 'Select B.name from `[wysija]user_list` as A join `[wysija]list` as B on A.list_id=B.list_id where A.user_id=' . $this->uid . ' and B.is_enabled>0';

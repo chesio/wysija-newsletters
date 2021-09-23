@@ -77,6 +77,7 @@ class WYSIJA_model_user extends WYSIJA_model{
      */
     function countSubscribers(Array $list_ids = array(), $confirmed_subscribers = true)
     {
+        $list_ids = array_map('intval', $list_ids);
         $model_config = WYSIJA::get('config','model');
         $confirm_dbleoptin = $model_config->getValue('confirm_dbleoptin');
         if($confirm_dbleoptin) $confirmed_subscribers = true;
