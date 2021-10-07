@@ -4,6 +4,9 @@ defined('WYSIJA') or die('Restricted access');
 require_once(WYSIJA_CORE.'module'.DS.'statistics.php'); // @todo
 
 class WYSIJA_control_back_statistics extends WYSIJA_control {
+  const ALLOWED_ACTIONS = [
+    'get_block',
+  ];
 
 	/**
 	 * Main model of this controller

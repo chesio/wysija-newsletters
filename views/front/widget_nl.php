@@ -134,13 +134,13 @@ class WYSIJA_view_front_widget_nl extends WYSIJA_view_front {
 			$extra_class = ' '.$params['form_type'].'_wysija';
 		}
 
-		$data.='<div class="widget_wysija_cont'.$extra_class.'">';
+		$data.='<div class="widget_wysija_cont'.esc_attr($extra_class).'">';
 
 		//if data has been posted the classique php/HTML way we display the result straight in good old HTML
 		if(isset($_POST['wysija']['user']['email']) && isset($_POST['formid']) && $form_id_real==$_POST['formid']){
-			$data.= str_replace ('class="wysija-msg', 'id="msg-'.$form_id_real.'" class="wysija-msg', $this->messages());
+			$data.= str_replace ('class="wysija-msg', 'id="msg-'.esc_attr($form_id_real).'" class="wysija-msg', $this->messages());
 		}else{
-			$data.='<div id="msg-'.$form_id_real.'" class="wysija-msg ajax">'.$msg_success_preview.'</div>';
+			$data.='<div id="msg-'.esc_attr($form_id_real).'" class="wysija-msg ajax">'.esc_html($msg_success_preview).'</div>';
 		}
 
 		// A form built with the form editor has been selected
@@ -184,7 +184,7 @@ class WYSIJA_view_front_widget_nl extends WYSIJA_view_front {
 				// interpret shortcodes
 				$form_html = do_shortcode($form_html);
 
-				$data .= '<form id="'.$form_id_real.'" method="post" action="#wysija" class="widget_wysija'.$extra_class.'">';
+				$data .= '<form id="'.esc_attr($form_id_real).'" method="post" action="#wysija" class="widget_wysija'.esc_attr($extra_class).'">';
 				$data .= $form_html;
 				$data .= '</form>';
 			}
@@ -192,7 +192,7 @@ class WYSIJA_view_front_widget_nl extends WYSIJA_view_front {
 
 			// What is included in this Else condition is only for retrocompatibility we should move it maybe to another file at some point as deprecated
 
-			$data .= '<form id="'.$form_id_real.'" method="post" action="#wysija" class="widget_wysija form-valid-sub">';
+			$data .= '<form id="'.esc_attr($form_id_real).'" method="post" action="#wysija" class="widget_wysija form-valid-sub">';
 
 			if(isset($params['instruction']) && $params['instruction'])   {
 				if(strpos($params['instruction'], '[total_subscribers') !== false){
@@ -201,7 +201,7 @@ class WYSIJA_view_front_widget_nl extends WYSIJA_view_front {
 
 					$params['instruction']=str_replace('[total_subscribers]', $totalsubscribers, $params['instruction']);
 				}
-				$data.='<p class="wysija-instruct">'.$params['instruction'].'</p>';
+				$data.='<p class="wysija-instruct">'.esc_html($params['instruction']).'</p>';
 			}
 
 
@@ -210,7 +210,7 @@ class WYSIJA_view_front_widget_nl extends WYSIJA_view_front {
 				$i=0;
 				foreach($params['lists'] as $list_id){
 					$list_fields.='<p class="wysija_list_check">
-						<label for="'.$form_id_real.'_list_id_'.$list_id.'"><input id="'.$form_id_real.'_list_id_'.$list_id.'" class="validate[minCheckbox[1]] checkbox checklists" type="checkbox" name="wysija[user_list][list_id][]" value="'.$list_id.'" checked="checked" /> '.$params['lists_name'][$list_id].' </label>
+						<label for="'.esc_attr($form_id_real).'_list_id_'.esc_attr($list_id).'"><input id="'.esc_attr($form_id_real).'_list_id_'.esc_attr($list_id).'" class="validate[minCheckbox[1]] checkbox checklists" type="checkbox" name="wysija[user_list][list_id][]" value="'.esc_attr($list_id).'" checked="checked" /> '.esc_html($params['lists_name'][$list_id]).' </label>
 							</p>';
 					$i++;
 				}
@@ -227,7 +227,7 @@ class WYSIJA_view_front_widget_nl extends WYSIJA_view_front {
 			$captcha_field = '';
 			if($helperUser->isCaptchaEnabled()) {
 				$captcha_key = htmlspecialchars($model_config->getValue('recaptcha_key'));
-				$captcha_field = '<div class="g-recaptcha" data-sitekey="'.$captcha_key.'" data-size="compact"></div>';
+				$captcha_field = '<div class="g-recaptcha" data-sitekey="'.esc_attr($captcha_key).'" data-size="compact"></div>';
 			}
 
 			$submit_value = (!empty($params['submit'])) ? $params['submit'] : __('Submit', WYSIJA);
@@ -245,7 +245,7 @@ class WYSIJA_view_front_widget_nl extends WYSIJA_view_front {
 				}
 
 				$classValidate='wysija-email '.$this->getClassValidate($this->model->columns['email'],true);
-				$data.='<p><input type="text" id="'.$form_id_real.'-wysija-to" class="'.$classValidate.'" value="'.$value_attribute.'" name="wysija[user][email]" />';
+				$data.='<p><input type="text" id="'.esc_attr($form_id_real).'-wysija-to" class="'.esc_attr($classValidate).'" value="'.esc_attr($value_attribute).'" name="wysija[user][email]" />';
 				$data.=$this->honey($params,$form_id_real);
 				$data.=$submitbutton.'</p>';
 			}
@@ -301,36 +301,36 @@ class WYSIJA_view_front_widget_nl extends WYSIJA_view_front {
 				if($fieldKey=='email') $fieldid=$formidreal.'-wysija-to';
 				else $fieldid=$formidreal.'-'.$fieldKey;
 				if(isset($params['form_type']) && $params['form_type']=='html'){
-					$titleplaceholder='placeholder="'.$field['label'].'" title="'.$field['label'].'"';
+					$titleplaceholder='placeholder="'.esc_attr($field['label']).'" title="'.esc_attr($field['label']).'"';
 				}else{
-					$titleplaceholder='title="'.$field['label'].'"';
+					$titleplaceholder='title="'.esc_attr($field['label']).'"';
 				}
 
-				$value_attribute=' value="'.$value_attribute.'" ';
+				$value_attribute=' value="'.esc_attr($value_attribute).'" ';
 				if(count($params['customfields'])>1){
 					if(isset($params['labelswithin'])){
 						 if($params['labelswithin']=='labels_within'){
-							$fieldstring='<input type="text" id="'.$fieldid.'" '.$titleplaceholder.' class="defaultlabels '.$classValidate.'" name="wysija[user]['.$fieldKey.']" '.$value_attribute.'/>';
+							$fieldstring='<input type="text" id="'.esc_attr($fieldid).'" '.$titleplaceholder.' class="defaultlabels '.esc_attr($classValidate).'" name="wysija[user]['.esc_attr($fieldKey).']" '.$value_attribute.'/>';
 						}else{
-							$fieldstring='<label for="'.$fieldid.'">'.$field['label'].'</label><input type="text" id="'.$fieldid.'" class="'.$classValidate.'" name="wysija[user]['.$fieldKey.']" />';
+							$fieldstring='<label for="'.esc_attr($fieldid).'">xxx'.esc_html($field['label']).'</label><input type="text" id="'.esc_attr($fieldid).'" class="'.esc_attr($classValidate).'" name="wysija[user]['.esc_attr($fieldKey).']" />';
 						}
 					}else{
-						$fieldstring='<label for="'.$fieldid.'">'.$field['label'].'</label><input type="text" id="'.$fieldid.'" class="'.$classValidate.'" name="wysija[user]['.$fieldKey.']" />';
+						$fieldstring='<label for="'.esc_attr($fieldid).'">yyy'.esc_html($field['label']).'</label><input type="text" id="'.esc_attr($fieldid).'" class="'.esc_attr($classValidate).'" name="wysija[user]['.esc_attr($fieldKey).']" />';
 					}
 				}else{
 					if(isset($params['labelswithin'])){
 						 if($params['labelswithin']=='labels_within'){
-							$fieldstring='<input type="text" id="'.$fieldid.'" '.$titleplaceholder.' class="defaultlabels '.$classValidate.'" name="wysija[user]['.$fieldKey.']" '.$value_attribute.'/>';
+							$fieldstring='<input type="text" id="'.esc_attr($fieldid).'" '.$titleplaceholder.' class="defaultlabels '.esc_attr($classValidate).'" name="wysija[user]['.esc_attr($fieldKey).']" '.$value_attribute.'/>';
 						}else{
-							$fieldstring='<input type="text" id="'.$fieldid.'" class="'.$classValidate.'" name="wysija[user]['.$fieldKey.']" '.$value_attribute.'/>';
+							$fieldstring='<input type="text" id="'.esc_attr($fieldid).'" class="'.esc_attr($classValidate).'" name="wysija[user]['.esc_attr($fieldKey).']" '.$value_attribute.'/>';
 						}
 					}else{
-						$fieldstring='<input type="text" id="'.$fieldid.'" class="'.$classValidate.'" name="wysija[user]['.$fieldKey.']" '.$value_attribute.'/>';
+						$fieldstring='<input type="text" id="'.esc_attr($fieldid).'" class="'.esc_attr($classValidate).'" name="wysija[user]['.esc_attr($fieldKey).']" '.$value_attribute.'/>';
 					}
 				}
 
 
-				$html.='<p class="wysija-p-'.$fieldKey.'">'.$fieldstring.'</p>';
+				$html.='<p class="wysija-p-'.esc_attr($fieldKey).'">'.$fieldstring.'</p>';
 			}
 
 			$html.=$this->honey($params,$formidreal);
@@ -353,11 +353,11 @@ class WYSIJA_view_front_widget_nl extends WYSIJA_view_front {
 			$fieldid=$formidreal.'-abs-'.$fieldKey;
 
 			if(isset($params['labelswithin'])){
-				$fieldstring='<input type="text" id="'.$fieldid.'" value="" class="defaultlabels validated[abs]['.$field['type'].']" name="wysija[user][abs]['.$fieldKey.']" />';
+				$fieldstring='<input type="text" id="'.esc_attr($fieldid).'" value="" class="defaultlabels validated[abs]['.esc_attr($field['type']).']" name="wysija[user][abs]['.esc_attr($fieldKey).']" />';
 			}else{
-				$fieldstring='<label for="'.$fieldid.'">'.$field['label'].'</label><input type="text" id="'.$fieldid.'" class="validated[abs]['.$field['type'].']" name="wysija[user][abs]['.$fieldKey.']" />';
+				$fieldstring='<label for="'.esc_attr($fieldid).'">'.esc_html($field['label']).'</label><input type="text" id="'.esc_attr($fieldid).'" class="validated[abs]['.esc_attr($field['type']).']" name="wysija[user][abs]['.esc_attr($fieldKey).']" />';
 			}
-			$html.='<span class="wysija-p-'.$fieldKey.' abs-req">'.$fieldstring.'</span>';
+			$html.='<span class="wysija-p-'.esc_attr($fieldKey).' abs-req">'.$fieldstring.'</span>';
 		}
 		return $html;
 	}

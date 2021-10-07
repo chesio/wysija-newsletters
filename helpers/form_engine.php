@@ -380,7 +380,7 @@ class WYSIJA_help_form_engine extends WYSIJA_object {
             }
 
             // generate html for toolbar item
-            $output .= '<li><a class="wysija_form_item" id="'.$field['column_name'].'" wysija_field="'.$field['column_name'].'" wysija_name="'.$field['name'].'" wysija_unique="'.$is_unique.'" wysija_type="'.$type.'">'.$field['name'].'</a>'.$actions.'</li>';
+            $output .= '<li><a class="wysija_form_item" id="'.esc_attr($field['column_name']).'" wysija_field="'.esc_attr($field['column_name']).'" wysija_name="'.esc_attr($field['name']).'" wysija_unique="'.esc_attr($is_unique).'" wysija_type="'.esc_attr($type).'">'.esc_html($field['name']).'</a>'.$actions.'</li>';
         }
 
         return $output;

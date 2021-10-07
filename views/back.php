@@ -528,7 +528,7 @@ class WYSIJA_view_back extends WYSIJA_view{
         $helper_forms=WYSIJA::get('forms','helper');
         switch($type){
             case 'pk':
-                return '<input type="hidden" value="'.$val.'" id="'.$id_field.'" name="'.$field_name.'">';
+                return '<input type="hidden" value="'.esc_attr($val).'" id="'.esc_attr($id_field).'" name="'.esc_attr($field_name).'">';
                 break;
             case 'boolean':
 

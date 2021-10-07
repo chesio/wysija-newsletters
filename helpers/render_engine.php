@@ -1139,7 +1139,7 @@ class WYSIJA_help_render_engine extends WYSIJA_object {
 
                 case 'join':
                     if(isset($arguments[0])) {
-                        $value = join($value, $arguments[0]);
+                        $value = join($arguments[0], $value);
                     }
                 break;
 

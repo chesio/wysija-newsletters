@@ -97,7 +97,7 @@ class WYSIJA_help_forms{
 			$data2=$data;
 			$data2['id'].="-".$val;
 			if($val==$value)$checked=true;
-			$html.='<label for="'.$data2['id'].'">'.$this->checkbox($data2, $val, $checked, $extra).$valtitle."</label>";
+			$html.='<label for="'.esc_attr($data2['id']).'">'.$this->checkbox($data2, $val, $checked, $extra).$valtitle."</label>";
 		}
 
 		return $html;
@@ -110,7 +110,7 @@ class WYSIJA_help_forms{
 			$data2=$data;
 			$data2['id'].="-".$val;
 			if($val==$value)$checked=true;
-			$html.='<label for="'.$data2['id'].'">'.$this->radio($data2, $val, $checked, $extra).$valtitle."</label>";
+			$html.='<label for="'.esc_attr($data2['id']).'">'.$this->radio($data2, $val, $checked, $extra).$valtitle."</label>";
 		}
 
 		return $html;
@@ -172,7 +172,7 @@ class WYSIJA_help_forms{
 			</div>
 
 	<?php
-			$the_editor = apply_filters('the_editor', "<div id='editorcontainer'><textarea rows='$rows'$class cols='40' name='$id' tabindex='$tab_index' id='$id'>%s</textarea></div>\n");
+			$the_editor = apply_filters('the_editor', "<div id='editorcontainer'><textarea rows='".esc_attr($rows)."'$class cols='40' name='".esc_attr($id)."' tabindex='$tab_index' id='".esc_attr($id)."'>%s</textarea></div>\n");
 			$the_editor_content = apply_filters('the_editor_content', $content);
 
 			printf($the_editor, $the_editor_content);
@@ -216,12 +216,12 @@ class WYSIJA_help_forms{
 					$form .= '<optgroup label="'.$key.'">'."\n";
 					foreach ($val as $optgroup_key => $optgroup_val) {
 							$sel = (in_array($optgroup_key, $selected)) ? ' selected="selected"' : '';
-							$form .= '<option value="'.esc_attr($optgroup_key).'"'.$sel.'>'.(string) $optgroup_val."</option>\n";
+							$form .= '<option value="'.esc_attr($optgroup_key).'"'.$sel.'>'.esc_html((string) $optgroup_val)."</option>\n";
 					}
 					$form .= '</optgroup>'."\n";
 				} else {
 					$sel = (in_array($key, $selected)) ? ' selected="selected"' : '';
-					$form .= '<option value="'.esc_attr($key).'"'.$sel.'>'.(string) $val."</option>\n";
+					$form .= '<option value="'.esc_attr($key).'"'.$sel.'>'.esc_html((string) $val)."</option>\n";
 				}
 			}
 			$form .= '</select>';
