@@ -19,7 +19,7 @@ class WYSIJA_object{
 	 * Static variable holding core MailPoet's version
 	 * @var array
 	 */
-	static $version = '2.15.pl';
+	static $version = '2.16.pl';
 
 	function __construct(){}
 
@@ -392,7 +392,8 @@ class WYSIJA_help extends WYSIJA_object{
 			$this->controller = WYSIJA::get( $_REQUEST['controller'] , 'controller' , false, $plugin_requesting_ajax );
 
                         // let's make sure the requested task exist
-			if( method_exists( $this->controller , $_REQUEST['task'] ) ){
+			$allowedConstant = get_class($this->controller) . '::ALLOWED_ACTIONS';
+			if(method_exists($this->controller, $_REQUEST['task']) && defined($allowedConstant) && in_array($_REQUEST['task'], constant($allowedConstant), true)){
 				$result_array['result'] = call_user_func(array($this->controller, $_REQUEST['task']));
 			}else{
 				$this->error( 'Method "' . esc_html($_REQUEST['task']) . '" doesn\'t exist for controller : "'.esc_html($_REQUEST['controller']) );

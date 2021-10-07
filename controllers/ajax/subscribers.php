@@ -2,6 +2,11 @@
 defined('WYSIJA') or die('Restricted access');
 include(dirname(dirname(__FILE__)).DS.'front.php');
 class WYSIJA_control_back_subscribers extends WYSIJA_control_front{
+    const ALLOWED_ACTIONS = [
+      'save',
+      'registerToLists',
+    ];
+
     var $model='user';
     var $view='';
 

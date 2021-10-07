@@ -1,6 +1,23 @@
 <?php
 defined('WYSIJA') or die('Restricted access');
 class WYSIJA_control_back_config extends WYSIJA_control{
+  const ALLOWED_ACTIONS = [
+    'send_test_mail',
+    'send_test_mail_ms',
+    'bounce_connect',
+    'bounce_process',
+    'linkignore',
+    'share_analytics',
+    'validate',
+    'wysija_form_generate_template',
+    'wysija_form_manage_field',
+    'form_field_delete',
+    'form_name_save',
+    'form_save',
+    'wysija_dismiss_update_notice',
+    'wysija_dismiss_license_notice',
+  ];
+
 
     function __construct(){
         if(!WYSIJA::current_user_can('wysija_config'))  die("Action is forbidden.");

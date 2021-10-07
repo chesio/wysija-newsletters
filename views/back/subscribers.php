@@ -270,12 +270,12 @@ class WYSIJA_view_back_subscribers extends WYSIJA_view_back
 		    }
 		    $header = '<tr class="thead">
                             <th scope="col" id="user-id" class="manage-column column-user-id check-column"><input type="checkbox" /></th>
-                            <th class="manage-column column-username'.$username_sorting.'" id="email" scope="col" style="width:140px;"><a href="#" class="orderlink" ><span>'.__('Email', WYSIJA).'</span><span class="sorting-indicator"></span></a></th>';
+                            <th class="manage-column column-username'.esc_attr($username_sorting).'" id="email" scope="col" style="width:140px;"><a href="#" class="orderlink" ><span>'.__('Email', WYSIJA).'</span><span class="sorting-indicator"></span></a></th>';
 		    $header .='<th class="manage-column column-list-names" id="list-list" scope="col">'.__('Lists', WYSIJA).'</th>';
-		    $header .='<th class="manage-column column-status'.$status_sorting.'" id="status" scope="col" style="width:80px;"><a href="#" class="orderlink" ><span>'.__('Status', WYSIJA).'</span><span class="sorting-indicator"></span></a></th>';
-		    $header .= '<th class="manage-column column-date'.$created_at_sorting.'" id="created_at" scope="col"><a href="#" class="orderlink" ><span>'.__('Subscribed on', WYSIJA).'</span><span class="sorting-indicator"></span></a></th>';
-		    $header .= '<th class="manage-column column-date' . $last_opened_sorting . '" id="last_opened" scope="col"><a href="#" class="orderlink" ><span>' . __('Last open', WYSIJA) . '</span><span class="sorting-indicator"></span></a></th>';
-		    $header .= '<th class="manage-column column-date' . $last_clicked_sorting . '" id="last_clicked" scope="col"><a href="#" class="orderlink" ><span>' . __('Last click', WYSIJA) . '</span><span class="sorting-indicator"></span></a></th>';
+		    $header .='<th class="manage-column column-status'.esc_attr($status_sorting).'" id="status" scope="col" style="width:80px;"><a href="#" class="orderlink" ><span>'.__('Status', WYSIJA).'</span><span class="sorting-indicator"></span></a></th>';
+		    $header .= '<th class="manage-column column-date'.esc_attr($created_at_sorting).'" id="created_at" scope="col"><a href="#" class="orderlink" ><span>'.__('Subscribed on', WYSIJA).'</span><span class="sorting-indicator"></span></a></th>';
+		    $header .= '<th class="manage-column column-date' . esc_attr($last_opened_sorting) . '" id="last_opened" scope="col"><a href="#" class="orderlink" ><span>' . __('Last open', WYSIJA) . '</span><span class="sorting-indicator"></span></a></th>';
+		    $header .= '<th class="manage-column column-date' . esc_attr($last_clicked_sorting) . '" id="last_clicked" scope="col"><a href="#" class="orderlink" ><span>' . __('Last click', WYSIJA) . '</span><span class="sorting-indicator"></span></a></th>';
 
 		    $header .= '</tr>';
 		    echo $header;
@@ -479,7 +479,7 @@ class WYSIJA_view_back_subscribers extends WYSIJA_view_back
 
 	$formid = 'wysija-'.$_REQUEST['action'];
 	?>
-	<form name="<?php echo $formid ?>" method="post" id="<?php echo $formid ?>" action="" class="form-valid">
+	<form name="<?php echo esc_attr($formid); ?>" method="post" id="<?php echo esc_attr($formid); ?>" action="" class="form-valid">
 
 	    <table class="form-table">
 		<tbody>

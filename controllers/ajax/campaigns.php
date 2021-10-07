@@ -1,6 +1,28 @@
 <?php
 defined('WYSIJA') or die('Restricted access');
 class WYSIJA_control_back_campaigns extends WYSIJA_control{
+  const ALLOWED_ACTIONS = [
+    'save_poll',
+    'switch_theme',
+    'save_editor',
+    'save_styles',
+    'deleteimg',
+    'deleteTheme',
+    'setDefaultTheme',
+    'save_IQS',
+    'insert_articles',
+    'send_preview',
+    'send_spamtest',
+    'set_divider',
+    'generate_social_bookmarks',
+    'install_theme',
+    'get_social_bookmarks',
+    'refresh_themes',
+    'generate_auto_post',
+    'load_auto_post',
+    'search_terms',
+    'get_articles',
+  ];
 
 	function __construct(){
 		if(!WYSIJA::current_user_can('wysija_newsletters'))  die('Action is forbidden.');

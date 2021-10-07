@@ -249,7 +249,7 @@ class WYSIJA_view_back_campaigns extends WYSIJA_view_back {
 				if ((isset($_REQUEST['link_filter']) && $_REQUEST['link_filter'] == $countType) || ($countType == 'allsent' && !isset($_REQUEST['link_filter'])))
 					$classcurrent = 'class="current"';
 
-				echo '<li><a ' . $classcurrent . ' href="admin.php?page=wysija_campaigns&action=viewstats&id=' . $_REQUEST['id'] . '&link_filter=' . $countType . '">' . $tradText . ' <span class="count">(' . $count . ')</span></a>';
+				echo '<li><a ' . $classcurrent . ' href="admin.php?page=wysija_campaigns&action=viewstats&id=' . esc_attr($_REQUEST['id']) . '&link_filter=' . esc_attr($countType) . '">' . $tradText . ' <span class="count">(' . esc_html($count) . ')</span></a>';
 
 				if ($total != $i)
 					echo ' | ';
@@ -867,7 +867,7 @@ class WYSIJA_view_back_campaigns extends WYSIJA_view_back {
 			if (!empty($_REQUEST['url_id']) && $_REQUEST['url_id'] == $click['url_id'])
 				$css_class .= ' select';
 
-			$link = 'admin.php?page=wysija_campaigns&action=viewstats&id=' . $_REQUEST['id'] . '&url_id=' . $click['url_id'];
+			$link = 'admin.php?page=wysija_campaigns&action=viewstats&id=' . esc_attr($_REQUEST['id']) . '&url_id=' . $click['url_id'];
 			$result.='<li><a href="' . $link . '" class="' . $css_class . '">' . $click['name'] . '</a> : ' . $label . '</li>';
 			$countloop++;
 		}
@@ -1198,7 +1198,7 @@ class WYSIJA_view_back_campaigns extends WYSIJA_view_back {
 					<?php if ((int) $data['email']['type'] === 2) { ?><li><a class="wysija_item" id="wysija-widget-autopost" wysija_type="popup-auto-post"><?php _e('Automatic latest content', WYSIJA) ?></a></li><?php } ?>
 				<li>
 					<a class="wysija_item" wysija_type="divider" wysija_src="<?php echo $divider['src'] ?>" wysija_width="<?php echo $divider['width'] ?>" wysija_height="<?php echo $divider['height'] ?>"><?php _e('Divider', WYSIJA) ?></a>
-					<a id="wysija_divider_settings" class="wysija_item_settings settings" title="<?php _e('Edit', WYSIJA); ?>" href="javascript:;" href2="admin.php?page=wysija_campaigns&action=dividers&tab=dividers&emailId=<?php echo $_REQUEST['id'] ?>"><span class="dashicons dashicons-admin-generic"></span></a>
+					<a id="wysija_divider_settings" class="wysija_item_settings settings" title="<?php _e('Edit', WYSIJA); ?>" href="javascript:;" href2="admin.php?page=wysija_campaigns&action=dividers&tab=dividers&emailId=<?php echo esc_attr($_REQUEST['id']); ?>"><span class="dashicons dashicons-admin-generic"></span></a>
 				</li>
 				<li><a class="wysija_item" wysija_type="popup-bookmark"><?php _e('Social bookmarks', WYSIJA) ?></a></li>
 			</ul>
@@ -1209,7 +1209,7 @@ class WYSIJA_view_back_campaigns extends WYSIJA_view_back {
 					<?php
 					$action = 'special_new_wordp_upload';
 					?>
-					<a id="wysija-upload-browse" class="button" href="javascript:;" href2="admin.php?page=wysija_campaigns&action=medias&tab=<?php echo $action; ?>&emailId=<?php echo $_REQUEST['id'] ?>"><?php _e('Add Images', WYSIJA) ?></a>
+					<a id="wysija-upload-browse" class="button" href="javascript:;" href2="admin.php?page=wysija_campaigns&action=medias&tab=<?php echo esc_attr($action); ?>&emailId=<?php echo esc_attr($_REQUEST['id']); ?>"><?php _e('Add Images', WYSIJA) ?></a>
 				</div>
 
 				<ul id="wj-images-quick" class="clearfix">
