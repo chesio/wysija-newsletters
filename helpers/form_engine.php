@@ -632,9 +632,14 @@ class WYSIJA_help_form_engine extends WYSIJA_object {
             $helper_render_engine = WYSIJA::get('render_engine', 'helper');
             $helper_render_engine->setTemplatePath(WYSIJA_EDITOR_TOOLS);
 
+            $settings = $this->get_data('settings');
+            if (isset($settings['success_message'])) {
+              $settings['success_message'] = esc_html($settings['success_message']);
+            }
+
             $data = array(
                 'preview' => ($this->get_mode() === 'preview'),
-                'settings' => $this->get_data('settings'),
+                'settings' => $settings,
                 'body' => $this->render_web_body()
             );
 

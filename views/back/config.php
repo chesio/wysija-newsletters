@@ -1888,7 +1888,7 @@ class WYSIJA_view_back_config extends WYSIJA_view_back {
 								<!--<label><input type="radio" name="on_success" value="message" checked="checked"  /><?php _e('show message', WYSIJA); ?></label>
 								<label><input type="radio" name="on_success" value="page" /><?php _e('go to page', WYSIJA); ?></label>-->
 							</p>
-							<textarea name="success_message"><?php echo $helper_form_engine->get_setting('success_message'); ?></textarea>
+							<textarea name="success_message"><?php echo esc_html($helper_form_engine->get_setting('success_message')); ?></textarea>
 						</div>
 
 						<p id="form-error" style="display:none;"></p>

@@ -1,5 +1,5 @@
 <select class="wysija_date_year {$validation}" name="{#field_prefix}[{#field}][year]" placeholder="{#i18n.date_select_year}">
 	{loop name="#years"}
-		<option value="{#year}"{if #is_selected} selected="selected"{/if}>{#year}</option>
+		<option value="{#year|esc_attr}"{if #is_selected} selected="selected"{/if}>{#year|esc_html}</option>
 	{/loop}
 </select>

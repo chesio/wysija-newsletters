@@ -1,9 +1,9 @@
 <p>
-	{if #params.label}<label>{#params.label}</label>{/if}
+	{if #params.label}<label>{#params.label|esc_html}</label>{/if}
 	<select disabled="disabled">
         {if ! #params.values}<option value="">--</option>{/if}
         {loop name="#params.values"}
-        <option value="{#value}"{if #is_checked} selected="selected"{/if}>{#value}</option>
+        <option value="{#value|esc_attr}"{if #is_checked} selected="selected"{/if}>{#value|esc_html}</option>
         {/loop}
     </select>
 </p>
