@@ -202,7 +202,7 @@ class WYSIJA_help_user extends WYSIJA_object {
 
             // if the on_success action is 'message', display message
             if ( $form_data['settings']['on_success'] === 'message') {
-                $message_success = nl2br( $form_data['settings']['success_message'] );
+                $message_success = nl2br(esc_html( $form_data['settings']['success_message'] ));
             }
         }
 

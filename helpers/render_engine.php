@@ -1244,6 +1244,14 @@ class WYSIJA_help_render_engine extends WYSIJA_object {
                     $value = $value%$arguments['0'];
                 break;
 
+                case 'esc_html':
+                  $value = esc_html($value);
+                break;
+
+                case 'esc_attr':
+                  $value = esc_attr($value);
+                break;
+
                 case 'trim_br':
                         $value = str_replace(array ("<br>", "<br/>", "<br />"), "\n", $value);
                         $value = nl2br (trim ($value));

@@ -3,7 +3,7 @@
 	<select>
 		{if #params.label_within && #params.label}<option value="">{#params.label}</option>{/if}
         {loop name="#params.values"}
-        <option value="{#value}"{if #is_checked} selected="selected"{/if}>{#value}</option>
+        <option value="{#value_attr}"{if #is_checked} selected="selected"{/if}>{#value}</option>
         {/loop}
     </select>
 </p>

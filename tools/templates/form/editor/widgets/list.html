@@ -1,4 +1,4 @@
-{if #params.label}<p>{#params.label}</p>{/if}
+{if #params.label}<p>{#params.label|esc_html}</p>{/if}
 {if ! #params.values}<p class="wysija_warning">{$i18n.list_cannot_be_empty}</p>{/if}
 {loop name="#params.values"}
     <p>
